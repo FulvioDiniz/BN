@@ -122,6 +122,7 @@ public class Jogo extends JFrame implements ActionListener {
 
     public void placarJogo(Jogo jogo){
         System.out.println("Jogo 1: " + jogo.getNumero_tiros() + " " + jogo.getNumero_acertos() + " " + jogo.getNumero_erros());
+    }
     
 
     public void carregarSom(String arquivoSom) throws Exception {
