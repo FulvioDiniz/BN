@@ -19,7 +19,7 @@ public class Jogo extends JFrame implements ActionListener {
     private int contador = 0;
     private final int ALTURA = 800;
     private final int LARGURA = 800;
-    private final int TAMANHO_MATRIZ = 20;
+    private final int TAMANHO_MATRIZ = 10;
     private JButton tabuleiro[][] = new JButton[TAMANHO_MATRIZ][TAMANHO_MATRIZ];
     private Image agua;
     private Image barco;
@@ -28,16 +28,17 @@ public class Jogo extends JFrame implements ActionListener {
     private LinkedList<Integer> coordenadaX = new LinkedList<Integer>();
     private LinkedList<Integer> coordenadaY = new LinkedList<Integer>();
 
-    public Jogo() {
+    public Jogo(String name) {
         setFocusable(true);
+        this.setTitle(name);
         this.setSize(ALTURA, LARGURA);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
-        String caminho = "/home/zavi6213/Área de Trabalho/bat/BatalhaNaval-master/Batalha_naval-JogoForca/Imagens//agua.png";
+        String caminho = "C:/Users/Fulvio/Desktop/bat/BatalhaNaval-master/Batalha_naval-JogoForca/Imagens/agua.png";
         ImageIcon agua1Icon = new ImageIcon(caminho);
-        String caminho2 = "/home/zavi6213/Área de Trabalho/bat/BatalhaNaval-master/Batalha_naval-JogoForca/Imagens//barco.png";
+        String caminho2 = "C:/Users/Fulvio/Desktop/bat/BatalhaNaval-master/Batalha_naval-JogoForca/Imagens/barco.png";
         ImageIcon barco1Icon = new ImageIcon(caminho2);
-        String caminho3 = "/home/zavi6213/Área de Trabalho/bat/BatalhaNaval-master/Batalha_naval-JogoForca/Imagens//bombear.png";
+        String caminho3 = "C:/Users/Fulvio/Desktop/bat/BatalhaNaval-master/Batalha_naval-JogoForca/Imagens/bombear.png";
         ImageIcon explosao1Icon = new ImageIcon(caminho3);
         agua = agua1Icon.getImage();
         barco = barco1Icon.getImage();
@@ -56,6 +57,7 @@ public class Jogo extends JFrame implements ActionListener {
                 tabuleiro[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 tabuleiro[i][j].setIcon(new ImageIcon(agua));
                 tabuleiro[i][j].setText("Agua");
+                tabuleiro[i][j].setForeground(new Color(0, 0, 0, 0));
                 add(tabuleiro[i][j]);
             }
         }
@@ -149,6 +151,7 @@ public class Jogo extends JFrame implements ActionListener {
             if (tabuleiro[x][y].getText() == "Agua") {
                 coordenadaX.add(x);
                 coordenadaY.add(y);
+                tabuleiro[x][y].setText("Barco");
                 tabuleiro[x][y].setOpaque(true);
                 //tabuleiro[x][y].setBorder(BorderFactory.createLineBorder(Color.white));
                 numero_barcos++;
@@ -160,7 +163,7 @@ public class Jogo extends JFrame implements ActionListener {
     public void verificaBarco() {
         for (int i = 0; i < coordenadaX.size(); i++) {
             for (int j = 0; j < coordenadaY.size(); j++) {
-                tabuleiro[coordenadaX.getFirst()][coordenadaY.getFirst()].setText("Barco");
+                //tabuleiro[coordenadaX.getFirst()][coordenadaY.getFirst()].setText("Barco");
                 coordenadaX.removeFirst();
                 coordenadaY.removeFirst();
             }
@@ -177,7 +180,7 @@ public class Jogo extends JFrame implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             JButton botao = (JButton) e.getSource();
-            verificaBarco();
+            //verificaBarco();
             if (botao.getText().equals("Agua")) {
                 botao.setIcon(new ImageIcon(explosao));               
                 numero_tiros++;

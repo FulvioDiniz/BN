@@ -1,40 +1,24 @@
 
 import javax.swing.*;
+import java.awt.Dimension;
 
 
-
-
-
-public class IniciaJogo extends JFrame{    
+public class IniciaJogo extends JFrame {
     public static void main(String[] args) {
-        int i = 0;
-        Jogo jogo = new Jogo();
-        Jogo jogo2 = new Jogo();
-        while(i < 800){
-            if(jogo.getAtualizou()){
-                jogo2.setAtualiou(true);
-                jogo.setAtualiou(false);
-                i++;
-            }
-            if(jogo2.getAtualizou()){
-                jogo.setAtualiou(true);
-                jogo2.setAtualiou(false);
-                i++;
-            }
-            System.out.println("Jogo 1: " + jogo.getNumero_tiros() + " " + jogo.getNumero_acertos() + " " + jogo.getNumero_erros());
-            System.out.println("Jogo 2: " + jogo2.getNumero_tiros() + " " + jogo2.getNumero_acertos() + " " + jogo2.getNumero_erros());
-        } 
-                
-        
-    }
+        Jogo jogo = new Jogo("Jogo 1");
+        Jogo jogo2 = new Jogo("Jogo 2");
+        Dimension tamanho = jogo.getSize();
+        int x = (int) tamanho.getWidth();
+        int y = (int) tamanho.getHeight();
+        Pontuacao pontuacao = new Pontuacao("Jogador 1", jogo);
+        Pontuacao pontuacao2 = new Pontuacao("Jogador 2", jogo2);
+        //pontuacao.run();
 
-    IniciaJogo() {
-        add(new Jogo());
-        setSize(800, 800);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setTitle("Batalha Naval");
-        //setVisible(true);
+        pontuacao.setBounds(x/1000, 0, x, y / 5);
+        pontuacao2.setBounds(x, 0, x, y / 5);
+        jogo.setBounds(x, y / 5, x, y);
+        jogo2.setBounds(0, y / 5, x, y);
 
     }
+
 }
